@@ -40,7 +40,7 @@ Flags read by this script:
 import sys
 import re
 import subprocess
-from setuptools import setup
+from setuptools import setup, find_packages
 from distutils.version import LooseVersion
 from torch.utils.cpp_extension import CppExtension, BuildExtension, CUDAExtension
 import os
@@ -62,10 +62,13 @@ def compile_ext(cuda_support):
     ext_module = get_extension(cuda_support)
 
     setup(name=ext_module.name,
-          version='1.0.0',
+          version='0.0.1',
+          author='F.M',
           ext_modules=[ext_module],
           extra_compile_args=['-mmacosx-version-min=10.9'],
-          cmdclass={'build_ext': BuildExtension})
+          cmdclass={'build_ext': BuildExtension},
+          download_url='https://github.com/gh4n/torchac/archive/0.01.tar.gz',
+          packages=find_packages())
 
 
 def get_extension(cuda_support):
