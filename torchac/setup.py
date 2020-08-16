@@ -67,7 +67,7 @@ def compile_ext(cuda_support):
           ext_modules=[ext_module],
           extra_compile_args=['-mmacosx-version-min=10.9'],
           cmdclass={'build_ext': BuildExtension},
-          download_url='https://github.com/gh4n/torchac/archive/0.01.tar.gz',
+          download_url='https://github.com/gh4n/torchac/archive/v0.0.1.tar.gz',
           packages=find_packages())
 
 
