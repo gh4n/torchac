@@ -150,7 +150,6 @@ def _assert_torch_version_sufficient():
 
 def main():
     _assert_torch_version_sufficient()
-    extra_compile_args = []
     cuda_flag = os.environ.get('COMPILE_CUDA', 'no')
 
     if cuda_flag == 'auto':
