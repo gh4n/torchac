@@ -104,3 +104,6 @@ venv.bak/
 
 # ds store
 .DS_Store
+
+# vim undo files
+*.un~
