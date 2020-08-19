@@ -62,6 +62,11 @@ def compile_ext(cuda_support):
     print('Compiling, cuda_support={}'.format(cuda_support))
     ext_module = get_extension(cuda_support)
 
+    install_requires = [
+        'torch>=1.1.0<=1.6.0',
+        'torchvision>=0.7.0'
+    ]
+
     setup(name=ext_module.name,
           version='0.0.1',
           author='F.M',
@@ -69,7 +74,8 @@ def compile_ext(cuda_support):
           extra_compile_args=['-mmacosx-version-min=10.9'],
           cmdclass={'build_ext': BuildExtension},
           download_url='https://github.com/gh4n/torchac/archive/v0.0.1.tar.gz',
-          packages=find_packages())
+          packages=find_packages()
+        )
 
 
 def get_extension(cuda_support):
@@ -156,10 +162,6 @@ def main():
         cuda_support = False
     else:
         raise ValueError('COMPILE_CUDA must be in (auto, force, no), got {}'.format(cuda_flag))
-    print(platform.system())
-    # if platform.system() == 'Darwin':
-    #     sdk = '/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk'
-    #     extra_compile_args += [f'-std=c++14', '-mmacosx-version-min=10.9', '-isysroot={sdk}']
     
     compile_ext(cuda_support)
 
