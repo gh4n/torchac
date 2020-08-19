@@ -44,6 +44,7 @@ from setuptools import setup, find_packages
 from distutils.version import LooseVersion
 from torch.utils.cpp_extension import CppExtension, BuildExtension, CUDAExtension
 import os
+import platform
 
 
 MODULE_BASE_NAME = 'torchac_backend'
@@ -143,7 +144,7 @@ def _assert_torch_version_sufficient():
 
 def main():
     _assert_torch_version_sufficient()
-
+    extra_compile_args = []
     cuda_flag = os.environ.get('COMPILE_CUDA', 'no')
 
     if cuda_flag == 'auto':
@@ -155,7 +156,11 @@ def main():
         cuda_support = False
     else:
         raise ValueError('COMPILE_CUDA must be in (auto, force, no), got {}'.format(cuda_flag))
-
+    print(platform.system())
+    # if platform.system() == 'Darwin':
+    #     sdk = '/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk'
+    #     extra_compile_args += [f'-std=c++14', '-mmacosx-version-min=10.9', '-isysroot={sdk}']
+    
     compile_ext(cuda_support)
 
 
